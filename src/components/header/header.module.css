@@ -1,0 +1,10 @@
+.container {
+    padding: 0 calc(20% - 100px);
+    margin : 0;
+}
+
+.header {
+    display        : flex;
+    justify-content: center;
+    padding        : 25px 15px;
+}

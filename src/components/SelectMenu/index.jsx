@@ -1,12 +1,12 @@
-import react from 'react'
+import styles from './SelectMenu.module.css'
 
-function SelectMenu({ value }) {
+function SelectMenu({ children }) {
     return (
-        <>
-            <select>
-                <option value={value}>{value}</option>
+        <div>
+            <select className={styles.inputSelect}>
+                {children}
             </select>
-        </>
+        </div>
     )
 }
 

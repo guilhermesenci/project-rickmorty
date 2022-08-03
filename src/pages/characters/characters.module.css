@@ -4,3 +4,12 @@
     justify-content: space-around;
     padding        : 0 calc(20% - 100px)
 }
+
+.searchArea {
+    width          : -webkit-fill-available;
+    display        : flex;
+    flex-direction : row;
+    justify-content: space-around;
+    flex-wrap      : wrap;
+    padding-bottom : 60px;
+}
