@@ -1,18 +1,15 @@
-import React, { useEffect } from 'React'
+import React from 'React'
 import useFetch from './hooks/useFetch'
 
-import styles from './app.modules.css'
+import styles from './app.module.css'
 import logo from './assets/logo.svg'
 
-import Card from './components/card'
 import NavBar from './components/navbar'
-import SelectMenu from './components/SelectMenu'
+import Card from './components/card'
 
 function App() {
   const { data: characters, isFetching } =
     useFetch("https://rickandmortyapi.com/api/character")
-
-  useEffect(() => { console.log(characters) }, [characters])
 
   return (
     <>
@@ -20,14 +17,16 @@ function App() {
       <header className={styles.header}>
         <img src={logo} />
       </header>
-      <ul>
-        {isFetching && <p>Carregando...</p>}
-        {characters?.map(character => {
-          return (
-            <li key={character.id}>{character.name}</li>
-          )
-        })}
-      </ul>
+      {characters?.map(character => {
+        return (
+          <Card
+            img={character.image}
+            name={character.name}
+            specie={character.species}
+            key={character.id}
+          />
+        )
+      })}
     </>
   )
 }
