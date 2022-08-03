@@ -1,7 +1,7 @@
 .container {
     background-color: #fefefe;
     box-shadow      : 0 4px 10px 0 rgba(119, 119, 119, 0.15);
-    height          : 100px;
+    height          : 60px;
     display         : flex;
     flex-direction  : row;
     justify-content : space-around;
@@ -15,7 +15,11 @@
     font-weight   : 600;
 }
 
+.link {
+    text-decoration: none;
+    color          : #000;
+}
+
 .linkText {
-    padding    : 0 10px;
-    font-family: 'Montserrat', sans-serif;
+    padding: 0 10px;
 }
