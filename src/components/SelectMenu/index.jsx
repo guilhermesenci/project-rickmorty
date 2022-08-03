@@ -1,9 +1,8 @@
 import react from 'react'
 
-function SelectMenu({ label, value }) {
+function SelectMenu({ value }) {
     return (
         <>
-            <label for={label} />
             <select>
                 <option value={value}>{value}</option>
             </select>
