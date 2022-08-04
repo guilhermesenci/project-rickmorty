@@ -1,6 +1,6 @@
-import styles from './bottomBar.module.css'
+import styles from './footer.module.css'
 
-export default function BottomBar() {
+export default function Footer() {
 
     return (
         <div className={styles.container}>

@@ -3,11 +3,12 @@ import { Routes, Route } from "react-router-dom"
 
 import styles from './app.module.css'
 
+import Profile from './pages/profile'
 import Characters from './pages/characters'
 import Locations from './pages/locations'
 import Episodes from './pages/episodes'
 import NavBar from './components/navbar'
-import BottomBar from './components/bottomBar'
+import Footer from './components/footer'
 
 function App() {
 
@@ -20,9 +21,10 @@ function App() {
           <Route path="/characters" element={<Characters />} />
           <Route path="/locations" element={<Locations />} />
           <Route path="/episodes" element={<Episodes />} />
+          <Route path="/profile/:name" element={<Profile />} />
         </Routes>
       </div>
-      <BottomBar />
+      <Footer />
     </>
   )
 }

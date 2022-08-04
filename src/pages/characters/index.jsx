@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import useFetch from '.././../hooks/useFetch'
-import Card from '../../components/card'
+import { Link } from "react-router-dom"
 
 import styles from './characters.module.css'
 
+import Card from '../../components/card'
 import InputText from '../../components/inputText'
 import SelectMenu from '../../components/selectMenu'
 import Header from '../../components/header'
@@ -42,8 +43,6 @@ export default function Characters() {
         })
         const statusOptions = [... new Set(statusOpt)]
         setSelectByStatus(statusOptions)
-
-
     }, [characters])
 
     const charactersFilter = search.length > 0
@@ -105,23 +104,30 @@ export default function Characters() {
                         search.length > 0 ?
                             filterList?.map(character => {
                                 return (
-                                    <Card
-                                        img={character.image}
-                                        name={character.name}
-                                        specie={character.species}
-                                        key={character.id}
-                                    />
+                                    <div className={styles.linkStyle} key={character.id}>
+                                        <Link to={`/profile/${character.name}`} className={styles.link}>
+                                            <Card
+                                                img={character.image}
+                                                name={character.name}
+                                                specie={character.species}
+                                            />
+                                        </Link>
+                                    </div>
                                 )
                             })
                             :
                             characterList?.map(character => {
                                 return (
-                                    <Card
-                                        img={character.image}
-                                        name={character.name}
-                                        specie={character.species}
-                                        key={character.id}
-                                    />
+                                    <div className={styles.linkStyle} key={character.id}>
+                                        <Link to={`/profile/${character.name}`} className={styles.link}>
+                                            <Card
+                                                img={character.image}
+                                                name={character.name}
+                                                specie={character.species}
+                                                key={character.id}
+                                            />
+                                        </Link>
+                                    </div>
                                 )
                             })
                     }

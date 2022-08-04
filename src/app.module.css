@@ -7,8 +7,7 @@ body {
 
 .scroll {
     overflow-y: scroll;
-    height    : 43.8vw;
-
+    max-height: 840px;
 }
 
 ::-webkit-scrollbar {
