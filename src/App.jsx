@@ -19,11 +19,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Characters />} />
           <Route path="/characters" element={<Characters />} />
-          <Route path="/locations" element={<Locations />} />
-          <Route path="/locations" element={<Locations />} />
-          <Route path="/episodes" element={<Episodes />} />
-          <Route path="/episodes/:episode" element={<Episodes />} />
           <Route path="/profile/:name" element={<Profile />} />
+          <Route path="/locations" element={<Locations />} />
+          <Route path="/locations/:location" element={''} />
+          <Route path="/episodes" element={<Episodes />} />
+          <Route path="/episodes/:episode" element={''} />
+          <Route path="*" element={<Characters />} />
         </Routes>
       </div>
       <Footer />
