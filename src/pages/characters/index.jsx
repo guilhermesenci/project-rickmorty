@@ -22,7 +22,9 @@ export default function Characters() {
         useFetch("https://rickandmortyapi.com/api/character")
 
     useEffect(() => {
-        setCharacterList(characters)
+        if (characters.results) {
+            setCharacterList(characters.results)
+        }
     }, [characters])
 
     useEffect(() => {

@@ -1,8 +1,23 @@
+.goBackDiv {
+    position   : absolute;
+    display    : flex;
+    align-items: center;
+    margin-left: 240px;
+    margin-top : 20px;
+    cursor     : pointer;
+}
+
+.goBackButton {
+    font-size  : 18px;
+    margin-left: 10px;
+}
+
 .container {
     display        : flex;
     flex-direction : column;
     justify-content: center;
     align-items    : center;
+    margin-top     : 15px;
 }
 
 .profilePicture {
@@ -27,4 +42,11 @@
 .title {
     font-size: 20px;
     color    : #8E8E93;
+}
+
+.scroll {
+    overflow-y : scroll;
+    overflow-x : hidden;
+    height     : 370px;
+    margin-left: 40px;
 }

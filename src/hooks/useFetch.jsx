@@ -10,13 +10,12 @@ export default function useFecth(url) {
                 return response.json()
             })
             .then(responsed => {
-                setData(responsed.results)
+                setData(responsed)
             })
-
             .finally(() => {
                 setIsFetching(false)
             })
-    }, [])
+    }, [url])
 
     return { data, isFetching }
 }
