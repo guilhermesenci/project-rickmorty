@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
 
-import useFetch from '.././../hooks/useFetch'
+import useFetch from '../../hooks/useFetch'
 import InfoText from '../../components/infoText'
 import LeftArrow from '../../assets/icon/leftArrow.svg'
 import styles from './profile.module.css'
 
-export default function Profile() {
+export default function character() {
     const [charactersList, setCharactersList] = useState([])
     const [charactersFilter, setCharactersFilter] = useState([])
     const [episodesList, setEpisodesList] = useState([])
