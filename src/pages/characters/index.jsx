@@ -13,6 +13,9 @@ import logo from '../../assets/logo.svg'
 export default function Characters() {
     const [search, setSearch] = useState([])
     const [characterList, setCharacterList] = useState([])
+    const [selectBySpecies, setSelectBySpecies] = useState([])
+    const [selectByGender, setSelectByGender] = useState([])
+    const [selectByStatus, setSelectByStatus] = useState([])
 
     const { data: characters } =
         useFetch("https://rickandmortyapi.com/api/character")
@@ -21,9 +24,45 @@ export default function Characters() {
         setCharacterList(characters)
     }, [characters])
 
+    useEffect(() => {
+        const speciesOpt = characterList.map(item => {
+            return item.species
+        })
+        const speciesOptions = [... new Set(speciesOpt)]
+        setSelectBySpecies(speciesOptions)
+
+        const genderOpt = characterList.map(item => {
+            return item.gender
+        })
+        const genderOptions = [... new Set(genderOpt)]
+        setSelectByGender(genderOptions)
+
+        const statusOpt = characterList.map(item => {
+            return item.status
+        })
+        const statusOptions = [... new Set(statusOpt)]
+        setSelectByStatus(statusOptions)
+
+
+    }, [characters])
+
     const charactersFilter = search.length > 0
         ? characterList.filter(characterSearched => characterSearched.name.toLowerCase().includes(search))
         : []
+
+    const speciesFilter = search.length > 0
+        ? characterList.filter(specieSelected => specieSelected.species.includes(search))
+        : []
+
+    const genderFilter = search.length > 0
+        ? characterList.filter(genderSelected => genderSelected.gender.includes(search))
+        : []
+
+    const statusFilter = search.length > 0
+        ? characterList.filter(statusSelected => statusSelected.status.includes(search))
+        : []
+
+    const filterList = [...charactersFilter, ...speciesFilter, ...genderFilter, ...statusFilter]
 
     return (
         <>
@@ -36,17 +75,35 @@ export default function Characters() {
                         onChange={e => setSearch(e.target.value)}
                         value={search}
                     />
-                    <SelectMenu>
-                    </SelectMenu>
-                    <SelectMenu />
-                    <SelectMenu />
+                    <SelectMenu
+                        name="species"
+                        options={selectBySpecies}
+                        placeholder="Species"
+                        onChange={e => setSearch(e.target.value)}
+                        value={selectBySpecies}
+                    />
+                    <SelectMenu
+                        name="species"
+                        options={selectByGender}
+                        placeholder="Gender"
+                        onChange={e => setSearch(e.target.value)}
+                        value={selectByGender}
+                    />
+                    <SelectMenu
+                        name="Status"
+                        options={selectByStatus}
+                        placeholder="Status"
+                        onChange={e => setSearch(e.target.value)}
+                        value={selectByStatus}
+
+                    />
                 </div>
             </div>
             <div>
                 <div className={styles.container}>
                     {
                         search.length > 0 ?
-                            charactersFilter?.map(character => {
+                            filterList?.map(character => {
                                 return (
                                     <Card
                                         img={character.image}
