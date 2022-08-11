@@ -4,7 +4,7 @@ export default function Footer() {
 
     return (
         <div className={styles.container}>
-            bottom bar
+            Make by Dev Guilherme Senci for study and Pratice
         </div>
     )
 }

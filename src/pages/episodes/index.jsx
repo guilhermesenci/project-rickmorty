@@ -35,7 +35,7 @@ export default function Episodes() {
                     episodesList?.map(episode => {
                             return (
                                 <div className={styles.linkStyle} key={episode.id}>
-                                    <Link to={`/episodes/${episode.episode}`} className={styles.link}>
+                                    <Link to={`/episodes/${episode.name}`} className={styles.link}>
                                         <InfoCard
                                             title={episode.name}
                                             subTitle={episode.air_date}

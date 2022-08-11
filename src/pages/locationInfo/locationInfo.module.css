@@ -1,0 +1,124 @@
+.goBackDiv {
+    position   : absolute;
+    display    : flex;
+    align-items: center;
+    margin-left: 240px;
+    margin-top : 20px;
+    cursor     : pointer;
+}
+
+.goBackButton {
+    font-size  : 18px;
+    margin-left: 10px;
+}
+
+.container {
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    margin-top     : 15px;
+}
+
+.profilePicture {
+    border-radius: 50%;
+    width        : 300px;
+    border       : 5px solid #F2F2F7;
+}
+
+.name {
+    font-weight: 400;
+    font-size  : 48px;
+    line-height: 56px;
+    align-items: center;
+    text-align : center;
+    color      : #081F32;
+}
+
+.infoArea {
+    display: flex;
+}
+
+.title {
+    font-size: 20px;
+    color    : #8E8E93;
+}
+
+.scroll {
+    overflow-y : scroll;
+    overflow-x : hidden;
+    height     : 370px;
+    margin-left: 40px;
+}
+
+.headerInformation {
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    margin-top     : 30px;
+}
+
+.locationName {
+    font-style : normal;
+    font-weight: 400;
+    font-size  : 36px;
+    line-height: 42px;
+    display    : flex;
+    align-items: center;
+    text-align : center;
+    color      : #081F32;
+}
+
+.subContainer {
+    display        : flex;
+    justify-content: space-around;
+    width          : 50%;
+    margin-top     : 50px;
+    margin-bottom  : 80px;
+}
+
+.subTitleContainer {
+    display       : flex;
+    flex-direction: column
+}
+
+.subTitle {
+    font-style    : normal;
+    font-weight   : 700;
+    font-size     : 16px;
+    line-height   : 24px;
+    letter-spacing: 0.15px;
+    color         : #081F32;
+}
+
+.residentsContainer {
+    display: flex;
+    width  : 100%;
+}
+
+.residentsTitle {
+    margin-left: 240px;
+}
+
+.linkStyle {
+    display       : flex;
+    flex-direction: row;
+    color         : #000;
+    font-weight   : 600;
+}
+
+.link {
+    text-decoration: none;
+    color          : #000;
+}
+
+.container {
+    display        : flex;
+    flex-wrap      : wrap;
+    flex-direction : row;
+    padding        : 0 calc(20% - 100px);
+    justify-content: space-around;
+    height         : 550px;
+    overflow-y     : scroll;
+}

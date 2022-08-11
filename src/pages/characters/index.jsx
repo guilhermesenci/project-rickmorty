@@ -107,7 +107,7 @@ export default function Characters() {
                             filterList?.map(character => {
                                 return (
                                     <div className={styles.linkStyle} key={character.id}>
-                                        <Link to={`/profile/${character.name}`} className={styles.link}>
+                                        <Link to={`/charaacter/${character.name}`} className={styles.link}>
                                             <Card
                                                 img={character.image}
                                                 name={character.name}
@@ -121,7 +121,7 @@ export default function Characters() {
                             characterList?.map(character => {
                                 return (
                                     <div className={styles.linkStyle} key={character.id}>
-                                        <Link to={`/profile/${character.name}`} className={styles.link}>
+                                        <Link to={`/character/${character.name}`} className={styles.link}>
                                             <Card
                                                 img={character.image}
                                                 name={character.name}

@@ -1,16 +1,15 @@
-import React, { useEffect, useState, useCallback } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
 
 import useFetch from '../../hooks/useFetch'
 import InfoText from '../../components/infoText'
 import LeftArrow from '../../assets/icon/leftArrow.svg'
-import styles from './profile.module.css'
+import styles from './character.module.css'
 
 export default function character() {
     const [charactersList, setCharactersList] = useState([])
     const [charactersFilter, setCharactersFilter] = useState([])
     const [episodesList, setEpisodesList] = useState([])
-    const [episode, setEpisode] = useState([])
 
     const navigate = useNavigate()
     const { name } = useParams()

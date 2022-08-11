@@ -22,6 +22,7 @@ export default function Locations() {
     useEffect(() => {
         if (locations.results) {
             setLocationList(locations.results)
+            console.log(locationsList)
         }
     }, [locations])
 
@@ -42,15 +43,15 @@ export default function Locations() {
     }, [locations])
 
     const locationsFilter = search.length > 0
-        ? locationsList.filter(characterSearched => characterSearched.name.toLowerCase().includes(search))
+        ? locationsList.filter(byName => byName.name.toLowerCase().includes(search))
         : []
 
     const typeFilter = search.length > 0
-        ? locationsList.filter(specieSelected => specieSelected.species.includes(search))
+        ? locationsList.filter(byType => byType.type.includes(search))
         : []
 
     const dimensionFilter = search.length > 0
-        ? locationsList.filter(genderSelected => genderSelected.gender.includes(search))
+        ? locationsList.filter(byDimension => byDimension.dimension.includes(search))
         : []
 
     const filterList = [...locationsFilter, ...typeFilter, ...dimensionFilter]
@@ -87,7 +88,7 @@ export default function Locations() {
                         filterList?.map((location, index) => {
                             return (
                                 <div className={styles.linkStyle} key={index}>
-                                    <Link to={`/locations/${location.location}`} className={styles.link}>
+                                    <Link to={`/locations/${location.name}`} className={styles.link}>
                                         <InfoCard
                                             title={location.name}
                                             subTitle={location.type}
