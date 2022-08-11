@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import useFetch from '.././../hooks/useFetch'
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import styles from './episodes.module.css'
 
@@ -11,6 +11,7 @@ import InfoCard from '../../components/infoCard'
 
 export default function Episodes() {
     const [search, setSearch] = useState([])
+    const navigate = useNavigate()
 
     const { data: episodes } =
         useFetch("https://rickandmortyapi.com/api/episode")
@@ -18,6 +19,10 @@ export default function Episodes() {
     const episodesList = search.length > 0
         ? episodes.results?.filter(episodesList => episodesList.name.toLowerCase().includes(search))
         : []
+
+    function goToEpisode(item) {
+        navigate(`/episodes/${item.name}`)
+    }
 
     return (
         <div className={styles.container}>
@@ -32,16 +37,15 @@ export default function Episodes() {
             <div className={styles.episodeList}>
                 {
                     search.length > 0 ?
-                    episodesList?.map(episode => {
+                        episodesList?.map(episode => {
                             return (
                                 <div className={styles.linkStyle} key={episode.id}>
-                                    <Link to={`/episodes/${episode.name}`} className={styles.link}>
-                                        <InfoCard
-                                            title={episode.name}
-                                            subTitle={episode.air_date}
-                                            text={episode.episode}
-                                        />
-                                    </Link>
+                                    <InfoCard
+                                        title={episode.name}
+                                        subTitle={episode.air_date}
+                                        text={episode.episode}
+                                        onClick={() => goToEpisode(episode)}
+                                    />
                                 </div>
                             )
                         })
@@ -49,13 +53,12 @@ export default function Episodes() {
                         episodes.results?.map(episode => {
                             return (
                                 <div className={styles.linkStyle} key={episode.id}>
-                                    <Link to={`/episodes/${episode.name}`} className={styles.link}>
-                                        <InfoCard
-                                            title={episode.name}
-                                            subTitle={episode.air_date}
-                                            text={episode.episode}
-                                        />
-                                    </Link>
+                                    <InfoCard
+                                        title={episode.name}
+                                        subTitle={episode.air_date}
+                                        text={episode.episode}
+                                        onClick={() => goToEpisode(episode)}
+                                    />
                                 </div>
                             )
                         })

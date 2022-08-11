@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 
 import Card from '../../components/card'
@@ -20,17 +19,13 @@ export default function LocationInfo() {
         if (episodes.results) {
             setEpisodeCast(episodes.results)
         }
-    }, [episode])
+    }, [episodes])
 
     useEffect(() => {
         if (episodeCast) {
             setEpisodeInfo(episodeCast.filter(episodeFilter => episodeFilter.name.includes(episode)))
         }
     }, [episodeCast])
-
-    function goBack() {
-        navigate("/")
-    }
 
     useEffect(() => {
         if (episodeInfos) {
@@ -45,6 +40,14 @@ export default function LocationInfo() {
     }, [episodeInfos])
 
     const { data: character } = useFetch(`https://rickandmortyapi.com/api/character/${characterList}`)
+
+    function goToCharacter(item) {
+        navigate(`/character/${item.name}`)
+    }
+
+    function goBack() {
+        navigate("/")
+    }
 
     return (
         <>
@@ -90,13 +93,12 @@ export default function LocationInfo() {
                                             character?.map(character => {
                                                 return (
                                                     <div className={styles.linkStyle} key={character.id}>
-                                                        <Link to={`/character/${character.name}`} className={styles.link}>
-                                                            <Card
-                                                                img={character.image}
-                                                                name={character.name}
-                                                                specie={character.species}
-                                                            />
-                                                        </Link>
+                                                        <Card
+                                                            img={character.image}
+                                                            name={character.name}
+                                                            specie={character.species}
+                                                            onClick={() => goToCharacter(item)}
+                                                        />
                                                     </div>
                                                 )
                                             })
@@ -106,8 +108,7 @@ export default function LocationInfo() {
                             </div>
                         </div>
                     )
-                })
-                }
+                })}
             </div>
         </>
     )

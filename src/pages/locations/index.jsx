@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import useFetch from '.././../hooks/useFetch'
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import styles from './locations.module.css'
 
@@ -15,6 +15,7 @@ export default function Locations() {
     const [locationsList, setLocationList] = useState([])
     const [selectByType, setSelectByType] = useState([])
     const [selectByDimension, setSelectByDimension] = useState([])
+    const navigate = useNavigate()
 
     const { data: locations } =
         useFetch("https://rickandmortyapi.com/api/location")
@@ -56,6 +57,10 @@ export default function Locations() {
 
     const filterList = [...locationsFilter, ...typeFilter, ...dimensionFilter]
 
+    function goToLocation(item) {
+        navigate(`/locations/${item.name}`)
+    }
+
     return (
         <div className={styles.container}>
             <Header logoImage={logo} />
@@ -88,12 +93,11 @@ export default function Locations() {
                         filterList?.map((location, index) => {
                             return (
                                 <div className={styles.linkStyle} key={index}>
-                                    <Link to={`/locations/${location.name}`} className={styles.link}>
-                                        <InfoCard
-                                            title={location.name}
-                                            subTitle={location.type}
-                                        />
-                                    </Link>
+                                    <InfoCard
+                                        title={location.name}
+                                        subTitle={location.type}
+                                        onClick={() => goToLocation(location)}
+                                    />
                                 </div>
                             )
                         })
@@ -101,12 +105,11 @@ export default function Locations() {
                         locationsList.map((location, index) => {
                             return (
                                 <div className={styles.linkStyle} key={index}>
-                                    <Link to={`/locations/${location.name}`} className={styles.link}>
-                                        <InfoCard
-                                            title={location.name}
-                                            subTitle={location.type}
-                                        />
-                                    </Link>
+                                    <InfoCard
+                                        title={location.name}
+                                        subTitle={location.type}
+                                        onClick={() => goToLocation(location)}
+                                    />
                                 </div>
                             )
                         })

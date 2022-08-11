@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import useFetch from '.././../hooks/useFetch'
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import styles from './characters.module.css'
 
@@ -17,6 +17,7 @@ export default function Characters() {
     const [selectBySpecies, setSelectBySpecies] = useState([])
     const [selectByGender, setSelectByGender] = useState([])
     const [selectByStatus, setSelectByStatus] = useState([])
+    const navigate = useNavigate()
 
     const { data: characters } =
         useFetch("https://rickandmortyapi.com/api/character")
@@ -65,6 +66,10 @@ export default function Characters() {
 
     const filterList = [...charactersFilter, ...speciesFilter, ...genderFilter, ...statusFilter]
 
+    function goToCharacter(item) {
+        navigate(`/character/${item.name}`)
+    }
+
     return (
         <>
             <div className={styles.container}>
@@ -107,13 +112,12 @@ export default function Characters() {
                             filterList?.map(character => {
                                 return (
                                     <div className={styles.linkStyle} key={character.id}>
-                                        <Link to={`/charaacter/${character.name}`} className={styles.link}>
-                                            <Card
-                                                img={character.image}
-                                                name={character.name}
-                                                specie={character.species}
-                                            />
-                                        </Link>
+                                        <Card
+                                            img={character.image}
+                                            name={character.name}
+                                            specie={character.species}
+                                            onClick={() => goToCharacter(character)}
+                                        />
                                     </div>
                                 )
                             })
@@ -121,14 +125,13 @@ export default function Characters() {
                             characterList?.map(character => {
                                 return (
                                     <div className={styles.linkStyle} key={character.id}>
-                                        <Link to={`/character/${character.name}`} className={styles.link}>
-                                            <Card
-                                                img={character.image}
-                                                name={character.name}
-                                                specie={character.species}
-                                                key={character.id}
-                                            />
-                                        </Link>
+                                        <Card
+                                            img={character.image}
+                                            name={character.name}
+                                            specie={character.species}
+                                            key={character.id}
+                                            onClick={() => goToCharacter(character)}
+                                        />
                                     </div>
                                 )
                             })

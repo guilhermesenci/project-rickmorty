@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 
 import useFetch from '../../hooks/useFetch'
 import InfoText from '../../components/infoText'
@@ -45,8 +45,8 @@ export default function character() {
         navigate("/characters")
     }
 
-    function goToEpisode(item) {
-        console.log(item)
+    function goToLocation(item) {
+        navigate(`/locations/${item.location.name}`)
     }
 
     return (
@@ -88,7 +88,7 @@ export default function character() {
                                             title="Location"
                                             subtitle={item.location.name}
                                             button={true}
-                                            onClick={() => goToEpisode(item)}
+                                            onClick={() => goToLocation(item)}
                                         />
                                     </div>
                                     <div>
@@ -102,7 +102,7 @@ export default function character() {
                                                         subtitle={item.name}
                                                         otherTitle={item.air_date}
                                                         button={true}
-                                                        onClick={() => goToEpisode(item)}
+                                                        onClick={() => goToLocation(item)}
                                                     />
                                                 )
                                             })}

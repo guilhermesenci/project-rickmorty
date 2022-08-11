@@ -9,11 +9,7 @@
     flex-direction: row;
     color         : #000;
     font-weight   : 600;
-}
-
-.link {
-    text-decoration: none;
-    color          : #000;
+    cursor        : pointer;
 }
 
 .episodeList {

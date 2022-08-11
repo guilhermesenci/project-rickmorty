@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 
 import Card from '../../components/card'
@@ -46,6 +45,10 @@ export default function LocationInfo() {
 
     const { data: character } = useFetch(`https://rickandmortyapi.com/api/character/${characterList}`)
 
+    function goToCharacter(item) {
+        navigate(`/character/${item.name}`)
+    }
+
     return (
         <>
             <div className={styles.body}>
@@ -80,13 +83,12 @@ export default function LocationInfo() {
                                             character?.map(character => {
                                                 return (
                                                     <div className={styles.linkStyle} key={character.id}>
-                                                        <Link to={`/character/${character.name}`} className={styles.link}>
-                                                            <Card
-                                                                img={character.image}
-                                                                name={character.name}
-                                                                specie={character.species}
-                                                            />
-                                                        </Link>
+                                                        <Card
+                                                            img={character.image}
+                                                            name={character.name}
+                                                            specie={character.species}
+                                                            onclick={() => goToCharacter(character)}
+                                                        />
                                                     </div>
                                                 )
                                             })
