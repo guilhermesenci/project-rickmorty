@@ -10,14 +10,16 @@ export default function LocationInfo() {
     const [episodeCast, setEpisodeCast] = useState([])
     const [episodeInfos, setEpisodeInfo] = useState([])
     const [characterList, setCharacterList] = useState([])
+    const [cast, setCast] = useState([])
 
     const navigate = useNavigate()
     const { episode } = useParams()
     const { data: episodes } = useFetch("https://rickandmortyapi.com/api/episode")
+    const { data: character } = useFetch(`https://rickandmortyapi.com/api/character`)
 
     useEffect(() => {
-        if (episodes.results) {
-            setEpisodeCast(episodes.results)
+        if (episodes) {
+            setEpisodeCast(episodes)
         }
     }, [episodes])
 
@@ -36,10 +38,16 @@ export default function LocationInfo() {
                 return (item.slice(forSlice))
             })
             setCharacterList(castEpisode)
+            console.log(castCharacter)
         }
     }, [episodeInfos])
 
-    const { data: character } = useFetch(`https://rickandmortyapi.com/api/character/${characterList}`)
+    useEffect(() => {
+        if (characterList && character) {
+            console.log(characterList)
+            setCast(character?.filter(item => item.id.includes(characterList)))
+        }
+    }, [characterList, character])
 
     function goToCharacter(item) {
         navigate(`/character/${item.name}`)
@@ -89,8 +97,8 @@ export default function LocationInfo() {
                                 <div>
                                     <div className={styles.container}>
                                         {
-                                            character.length > 0 &&
-                                            character?.map(character => {
+                                            cast.length > 0 &&
+                                            cast?.map(character => {
                                                 return (
                                                     <div className={styles.linkStyle} key={character.id}>
                                                         <Card

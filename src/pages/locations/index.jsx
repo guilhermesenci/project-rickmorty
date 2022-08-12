@@ -21,9 +21,8 @@ export default function Locations() {
         useFetch("https://rickandmortyapi.com/api/location")
 
     useEffect(() => {
-        if (locations.results) {
-            setLocationList(locations.results)
-            console.log(locationsList)
+        if (locations) {
+            setLocationList(locations)
         }
     }, [locations])
 
@@ -90,9 +89,9 @@ export default function Locations() {
             <div className={styles.episodeList}>
                 {
                     search.length > 0 ?
-                        filterList?.map((location, index) => {
+                        filterList?.map((location) => {
                             return (
-                                <div className={styles.linkStyle} key={index}>
+                                <div className={styles.linkStyle} key={location.id}>
                                     <InfoCard
                                         title={location.name}
                                         subTitle={location.type}
@@ -102,9 +101,9 @@ export default function Locations() {
                             )
                         })
                         :
-                        locationsList.map((location, index) => {
+                        locationsList.map((location) => {
                             return (
-                                <div className={styles.linkStyle} key={index}>
+                                <div className={styles.linkStyle} key={location.id}>
                                     <InfoCard
                                         title={location.name}
                                         subTitle={location.type}

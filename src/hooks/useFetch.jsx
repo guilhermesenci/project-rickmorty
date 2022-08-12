@@ -1,37 +1,31 @@
 import { useState, useEffect } from 'react'
 
-export default function useFecth(url) {
+export default function useFetch(url) {
     const [data, setData] = useState([] || null)
     const [page, setPage] = useState()
     const [isFetching, setIsFetching] = useState(true)
 
-    useEffect(() => {
+    function fetchApi(url) {
         fetch(url)
-            .then(response => {
+            .then((response) => {
                 return response.json()
             })
-            .then(responsed => {
-                setData(responsed)
-                setPage(responsed?.info?.next)
+            .then((resp) => {
+                const arrConcatenated = data.concat(resp?.results)
+                setData(arrConcatenated)
+                setPage(resp?.info?.next)
             })
-            .finally(() => {
-                setIsFetching(false)
-            })
+    }
+
+    useEffect(() => {
+        fetchApi(url)
     }, [url])
 
     useEffect(() => {
         if (page) {
-            fetch(url)
-                .then(response => {
-                    return response.json()
-                })
-                .then(responsed => {
-                    setData([...data, responsed])
-                    setPage(responsed?.info?.next)
-                })
-                .finally(() => {
-                    setIsFetching(false)
-                })
+            fetchApi(page)
+        } else {
+            setIsFetching(false)
         }
     }, [page])
 

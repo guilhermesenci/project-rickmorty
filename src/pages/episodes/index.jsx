@@ -13,15 +13,15 @@ export default function Episodes() {
     const [search, setSearch] = useState([])
     const navigate = useNavigate()
 
-    const { data: episodes } =
-        useFetch("https://rickandmortyapi.com/api/episode")
+    const { data: episodes } = useFetch("https://rickandmortyapi.com/api/episode")
+    console.log(episodes)
 
     const episodesList = search.length > 0
         ? episodes.results?.filter(episodesList => episodesList.name.toLowerCase().includes(search))
         : []
 
-    function goToEpisode(item) {
-        navigate(`/episodes/${item.name}`)
+    function goToEpisode(episode) {
+        navigate(`/episodes/${episode.name}`)
     }
 
     return (
@@ -50,7 +50,7 @@ export default function Episodes() {
                             )
                         })
                         :
-                        episodes.results?.map(episode => {
+                        episodes.map(episode => {
                             return (
                                 <div className={styles.linkStyle} key={episode.id}>
                                     <InfoCard

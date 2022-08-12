@@ -16,8 +16,8 @@ export default function LocationInfo() {
     const { data: locations } = useFetch("https://rickandmortyapi.com/api/location")
 
     useEffect(() => {
-        if (locations.results) {
-            setLocationsList(locations.results)
+        if (locations) {
+            setLocationsList(locations)
         }
     }, [locations])
 

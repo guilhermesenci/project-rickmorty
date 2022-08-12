@@ -19,17 +19,17 @@ export default function Characters() {
     const [selectByStatus, setSelectByStatus] = useState([])
     const navigate = useNavigate()
 
-    const { data: characters } =
-        useFetch("https://rickandmortyapi.com/api/character")
+    const { data: characters } = useFetch("https://rickandmortyapi.com/api/character")
 
     useEffect(() => {
-        if (characters.results) {
-            setCharacterList(characters.results)
+        if (characters) {
+            setCharacterList(characters)
         }
     }, [characters])
 
     useEffect(() => {
         const speciesOpt = characterList.map(item => {
+            console.log(item)
             return item.species
         })
         const speciesOptions = [... new Set(speciesOpt)]
@@ -46,7 +46,8 @@ export default function Characters() {
         })
         const statusOptions = [... new Set(statusOpt)]
         setSelectByStatus(statusOptions)
-    }, [characters])
+        console.log(statusOptions)
+    }, [characterList])
 
     const charactersFilter = search.length > 0
         ? characterList.filter(characterSearched => characterSearched.name.toLowerCase().includes(search))
@@ -109,9 +110,9 @@ export default function Characters() {
                 <div className={styles.container}>
                     {
                         search.length > 0 ?
-                            filterList?.map(character => {
+                            filterList?.map((character, index) => {
                                 return (
-                                    <div className={styles.linkStyle} key={character.id}>
+                                    <div className={styles.linkStyle} key={index}>
                                         <Card
                                             img={character.image}
                                             name={character.name}
@@ -122,9 +123,9 @@ export default function Characters() {
                                 )
                             })
                             :
-                            characterList?.map(character => {
+                            characterList?.map((character, index) => {
                                 return (
-                                    <div className={styles.linkStyle} key={character.id}>
+                                    <div className={styles.linkStyle} key={index}>
                                         <Card
                                             img={character.image}
                                             name={character.name}

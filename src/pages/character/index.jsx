@@ -16,8 +16,8 @@ export default function character() {
     const { data: characters } = useFetch("https://rickandmortyapi.com/api/character")
 
     useEffect(() => {
-        if (characters.results) {
-            setCharactersList(characters.results)
+        if (characters) {
+            setCharactersList(characters)
         }
     }, [characters])
 
@@ -97,7 +97,7 @@ export default function character() {
                                             {episodes.length > 0 && episodes.map(item => {
                                                 return (
                                                     <InfoText
-                                                        key={item.episode}
+                                                        key={item.id}
                                                         title={item.episode}
                                                         subtitle={item.name}
                                                         otherTitle={item.air_date}
