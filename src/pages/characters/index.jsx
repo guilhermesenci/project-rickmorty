@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useFetch from '.././../hooks/useFetch'
+import useCharacter from '.././../hooks/useCharacter'
 import { useNavigate } from "react-router-dom"
 
 import styles from './characters.module.css'
@@ -9,6 +9,7 @@ import InputText from '../../components/inputText'
 import SelectMenu from '../../components/selectMenu'
 import Header from '../../components/header'
 
+import spinnerImg from '../../assets/loading.svg'
 import logo from '../../assets/logo.svg'
 
 export default function Characters() {
@@ -19,7 +20,7 @@ export default function Characters() {
     const [selectByStatus, setSelectByStatus] = useState([])
     const navigate = useNavigate()
 
-    const { data: characters } = useFetch("https://rickandmortyapi.com/api/character")
+    const { data: characters, isFetching: loading } = useCharacter()
 
     useEffect(() => {
         if (characters) {
@@ -27,9 +28,10 @@ export default function Characters() {
         }
     }, [characters])
 
+    useEffect(() => { console.log(loading) }, [loading])
+
     useEffect(() => {
         const speciesOpt = characterList.map(item => {
-            console.log(item)
             return item.species
         })
         const speciesOptions = [... new Set(speciesOpt)]
@@ -46,7 +48,6 @@ export default function Characters() {
         })
         const statusOptions = [... new Set(statusOpt)]
         setSelectByStatus(statusOptions)
-        console.log(statusOptions)
     }, [characterList])
 
     const charactersFilter = search.length > 0
@@ -73,72 +74,81 @@ export default function Characters() {
 
     return (
         <>
-            <div className={styles.container}>
-                <Header logoImage={logo} />
-                <div className={styles.searchArea}>
-                    <InputText
-                        placeHolder="Filter by name..."
-                        name={search}
-                        onChange={e => setSearch(e.target.value)}
-                        value={search}
-                    />
-                    <SelectMenu
-                        name="species"
-                        options={selectBySpecies}
-                        placeholder="Species"
-                        onChange={e => setSearch(e.target.value)}
-                        value={selectBySpecies}
-                    />
-                    <SelectMenu
-                        name="species"
-                        options={selectByGender}
-                        placeholder="Gender"
-                        onChange={e => setSearch(e.target.value)}
-                        value={selectByGender}
-                    />
-                    <SelectMenu
-                        name="Status"
-                        options={selectByStatus}
-                        placeholder="Status"
-                        onChange={e => setSearch(e.target.value)}
-                        value={selectByStatus}
+            {
+                loading ?
+                    <div className={styles.loadingDiv}>
+                        <div className={styles.loadingImg}>< img src={spinnerImg} className={styles.rotate} /></div>
+                    </div>
+                    :
+                    <>
+                        <div className={styles.container}>
+                            <Header logoImage={logo} />
+                            <div className={styles.searchArea}>
+                                <InputText
+                                    placeHolder="Filter by name..."
+                                    name={search}
+                                    onChange={e => setSearch(e.target.value)}
+                                    value={search}
+                                />
+                                <SelectMenu
+                                    name="species"
+                                    options={selectBySpecies}
+                                    placeholder="Species"
+                                    onChange={e => setSearch(e.target.value)}
+                                    value={selectBySpecies}
+                                />
+                                <SelectMenu
+                                    name="species"
+                                    options={selectByGender}
+                                    placeholder="Gender"
+                                    onChange={e => setSearch(e.target.value)}
+                                    value={selectByGender}
+                                />
+                                <SelectMenu
+                                    name="Status"
+                                    options={selectByStatus}
+                                    placeholder="Status"
+                                    onChange={e => setSearch(e.target.value)}
+                                    value={selectByStatus}
 
-                    />
-                </div>
-            </div>
-            <div>
-                <div className={styles.container}>
-                    {
-                        search.length > 0 ?
-                            filterList?.map((character, index) => {
-                                return (
-                                    <div className={styles.linkStyle} key={index}>
-                                        <Card
-                                            img={character.image}
-                                            name={character.name}
-                                            specie={character.species}
-                                            onClick={() => goToCharacter(character)}
-                                        />
-                                    </div>
-                                )
-                            })
-                            :
-                            characterList?.map((character, index) => {
-                                return (
-                                    <div className={styles.linkStyle} key={index}>
-                                        <Card
-                                            img={character.image}
-                                            name={character.name}
-                                            specie={character.species}
-                                            key={character.id}
-                                            onClick={() => goToCharacter(character)}
-                                        />
-                                    </div>
-                                )
-                            })
-                    }
-                </div>
-            </div>
+                                />
+                            </div>
+                        </div>
+                        <div>
+                            <div className={styles.container}>
+                                {
+                                    search.length > 0 ?
+                                        filterList?.map((character, index) => {
+                                            return (
+                                                <div className={styles.linkStyle} key={index}>
+                                                    <Card
+                                                        img={character.image}
+                                                        name={character.name}
+                                                        specie={character.species}
+                                                        onClick={() => goToCharacter(character)}
+                                                    />
+                                                </div>
+                                            )
+                                        })
+                                        :
+                                        characterList?.map((character, index) => {
+                                            return (
+                                                <div className={styles.linkStyle} key={index}>
+                                                    <Card
+                                                        img={character.image}
+                                                        name={character.name}
+                                                        specie={character.species}
+                                                        key={character.id}
+                                                        onClick={() => goToCharacter(character)}
+                                                    />
+                                                </div>
+                                            )
+                                        })
+                                }
+                            </div>
+                        </div>
+                    </>
+            }
         </>
 
     )
