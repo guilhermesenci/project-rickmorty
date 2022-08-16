@@ -89,14 +89,14 @@ export default function LocationInfo() {
                                 </div>
                                 <div>
                                     <div className={styles.container}>
-                                        {residents.length && residents.map(character => {
+                                        {residents.length && residents.map((character, index) => {
                                             return (
-                                                <div className={styles.linkStyle} key={character.id}>
+                                                <div className={styles.linkStyle} key={index}>
                                                     <Card
                                                         img={character.image}
                                                         name={character.name}
                                                         specie={character.species}
-                                                        onclick={() => goToCharacter(character)}
+                                                        onClick={() => goToCharacter(character)}
                                                     />
                                                 </div>
                                             )

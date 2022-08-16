@@ -48,7 +48,6 @@ export default function LocationInfo() {
                 .then((response) => {
                     setCast(response)
                 })
-            console.log(characterList)
         }
     }, [characterList])
 

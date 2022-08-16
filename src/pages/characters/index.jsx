@@ -28,8 +28,6 @@ export default function Characters() {
         }
     }, [characters])
 
-    useEffect(() => { console.log(loading) }, [loading])
-
     useEffect(() => {
         const speciesOpt = characterList.map(item => {
             return item.species
