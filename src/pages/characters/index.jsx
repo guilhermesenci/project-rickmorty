@@ -67,7 +67,7 @@ export default function Characters() {
     const filterList = [...charactersFilter, ...speciesFilter, ...genderFilter, ...statusFilter]
 
     function goToCharacter(item) {
-        navigate(`/character/${item.name}`)
+        navigate(`/character/${item.name}/${item.id}`)
     }
 
     return (
@@ -111,39 +111,35 @@ export default function Characters() {
 
                                 />
                             </div>
-                        </div>
-                        <div>
-                            <div className={styles.container}>
-                                {
-                                    search.length > 0 ?
-                                        filterList?.map((character, index) => {
-                                            return (
-                                                <div className={styles.linkStyle} key={index}>
-                                                    <Card
-                                                        img={character.image}
-                                                        name={character.name}
-                                                        specie={character.species}
-                                                        onClick={() => goToCharacter(character)}
-                                                    />
-                                                </div>
-                                            )
-                                        })
-                                        :
-                                        characterList?.map((character, index) => {
-                                            return (
-                                                <div className={styles.linkStyle} key={index}>
-                                                    <Card
-                                                        img={character.image}
-                                                        name={character.name}
-                                                        specie={character.species}
-                                                        key={character.id}
-                                                        onClick={() => goToCharacter(character)}
-                                                    />
-                                                </div>
-                                            )
-                                        })
-                                }
-                            </div>
+                            {
+                                search.length > 0 ?
+                                    filterList?.map((character, index) => {
+                                        return (
+                                            <div className={styles.linkStyle} key={index}>
+                                                <Card
+                                                    img={character.image}
+                                                    name={character.name}
+                                                    specie={character.species}
+                                                    onClick={() => goToCharacter(character)}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                                    :
+                                    characterList?.map((character, index) => {
+                                        return (
+                                            <div className={styles.linkStyle} key={index}>
+                                                <Card
+                                                    img={character.image}
+                                                    name={character.name}
+                                                    specie={character.species}
+                                                    key={character.id}
+                                                    onClick={() => goToCharacter(character)}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                            }
                         </div>
                     </>
             }

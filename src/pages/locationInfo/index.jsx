@@ -9,7 +9,6 @@ import styles from './locationInfo.module.css'
 export default function LocationInfo() {
     const [locationsList, setLocationsList] = useState([])
     const [locationFilter, setLocationFilter] = useState([])
-    const [characterList, setCharacterList] = useState([])
     const [residents, setResidents] = useState([])
 
     const navigate = useNavigate()
@@ -40,13 +39,13 @@ export default function LocationInfo() {
             let livingHere = peopleLivingHere[0]?.map(item => {
                 return (item.slice(forSlice))
             })
-            setCharacterList(livingHere)
+            fetchAPI(livingHere)
         }
     }, [locationFilter])
 
-    useEffect(() => {
-        if (characterList) {
-            fetch(`https://rickandmortyapi.com/api/character/${characterList}`)
+    function fetchAPI(value) {
+        if (value) {
+            fetch(`https://rickandmortyapi.com/api/character/${value}`)
                 .then((res) => {
                     return res.json()
                 })
@@ -54,7 +53,7 @@ export default function LocationInfo() {
                     setResidents(response)
                 })
         }
-    }, [characterList])
+    }
 
     function goToCharacter(item) {
         navigate(`/character/${item.name}`)

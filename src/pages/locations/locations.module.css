@@ -7,9 +7,13 @@
 
 .searchArea {
     display        : flex;
-    justify-content: space-between;
+    justify-content: center;
     width          : 55vw;
-    padding-bottom : 60px;
+    padding-bottom : 40px;
+}
+
+.searchArea div {
+    margin: 10px;
 }
 
 .linkStyle {

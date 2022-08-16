@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Characters />} />
           <Route path="/characters" element={<Characters />} />
-          <Route path="/character/:name" element={<Character />} />
+          <Route path="/character/:name/:id" element={<Character />} />
           <Route path="/locations" element={<Locations />} />
           <Route path="/locations/:location" element={<LocationInfo />} />
           <Route path="/episodes" element={<Episodes />} />

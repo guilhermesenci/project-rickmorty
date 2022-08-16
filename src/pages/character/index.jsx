@@ -9,11 +9,11 @@ import styles from './character.module.css'
 export default function character() {
     const [charactersList, setCharactersList] = useState([])
     const [charactersFilter, setCharactersFilter] = useState([])
-    const [episodesList, setEpisodesList] = useState([])
     const [episodes, setEpisodes] = useState([])
 
     const navigate = useNavigate()
     const { name } = useParams()
+    const { id } = useParams()
     const { data: characters } = useFetch("https://rickandmortyapi.com/api/character")
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export default function character() {
 
     useEffect(() => {
         if (charactersList) {
-            setCharactersFilter(charactersList.filter(characterSearched => characterSearched.name.includes(name)))
+            setCharactersFilter(charactersList.filter(item => { if (item.id == id && item.name == name) return item }))
         }
     }, [charactersList])
 
@@ -36,13 +36,13 @@ export default function character() {
             let epList = auxEpList[0]?.map(item => {
                 return (item.slice(forSlice))
             })
-            setEpisodesList(epList)
+            fetchAPI(epList)
         }
     }, [charactersFilter])
 
-    useEffect(() => {
-        if (episodesList) {
-            fetch(`https://rickandmortyapi.com/api/episode/${episodesList}`)
+    function fetchAPI(value) {
+        if (value) {
+            fetch(`https://rickandmortyapi.com/api/episode/${value}`)
                 .then((response) => {
                     return response.json()
                 })
@@ -50,7 +50,7 @@ export default function character() {
                     setEpisodes(res)
                 })
         }
-    }, [episodesList])
+    }
 
     function goBack() {
         navigate("/characters")

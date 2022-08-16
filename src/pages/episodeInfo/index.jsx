@@ -9,7 +9,6 @@ import styles from './episodeInfo.module.css'
 export default function LocationInfo() {
     const [episodeCast, setEpisodeCast] = useState([])
     const [episodeInfos, setEpisodeInfo] = useState([])
-    const [characterList, setCharacterList] = useState([])
     const [cast, setCast] = useState([])
     const navigate = useNavigate()
     const { episode } = useParams()
@@ -35,13 +34,13 @@ export default function LocationInfo() {
             let castEpisode = castCharacter[0]?.map(item => {
                 return (item.slice(forSlice))
             })
-            setCharacterList(castEpisode)
+            fetchApi(castEpisode)
         }
     }, [episodeInfos])
 
-    useEffect(() => {
-        if (characterList) {
-            fetch(`https://rickandmortyapi.com/api/character/${characterList}`)
+    function fetchApi(value) {
+        if (value) {
+            fetch(`https://rickandmortyapi.com/api/character/${value}`)
                 .then(res => {
                     return res.json()
                 })
@@ -49,7 +48,7 @@ export default function LocationInfo() {
                     setCast(response)
                 })
         }
-    }, [characterList])
+    }
 
     function goToCharacter(item) {
         navigate(`/character/${item.name}`)
@@ -65,9 +64,9 @@ export default function LocationInfo() {
                 <div className={styles.goBackDiv} onClick={() => goBack()}>
                     <img src={LeftArrow} /><span className={styles.goBackButton} >GO BACK</span>
                 </div>
-                {episodeInfos.map(item => {
+                {episodeInfos.map((item, index) => {
                     return (
-                        <div key={item.id}>
+                        <div key={index}>
                             <div className={styles.headerInformation}>
                                 <span className={styles.locationName}>
                                     {item.name}

@@ -1,17 +1,24 @@
 .container {
     display        : flex;
     flex-wrap      : wrap;
-    justify-content: space-around;
-    padding        : 0 calc(20% - 100px)
+    justify-content: center;
+    padding-left   : 410px;
+    padding-right  : 420px;
 }
 
 .searchArea {
     width          : -webkit-fill-available;
     display        : flex;
     flex-direction : row;
-    justify-content: space-around;
+    justify-content: center;
     flex-wrap      : wrap;
-    padding-bottom : 60px;
+    padding-bottom : 40px;
+
+
+}
+
+.searchArea div {
+    margin: 10px;
 }
 
 .linkStyle {
@@ -20,6 +27,7 @@
     color         : #000;
     font-weight   : 600;
     cursor        : pointer;
+    margin        : 10px;
 }
 
 .loadingDiv {
@@ -32,7 +40,7 @@
 }
 
 .loadingImg {
-    animation      : rotate 1s infinite linear;
+    animation: rotate 1s infinite linear;
 }
 
 @keyframes rotate {

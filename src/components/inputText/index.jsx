@@ -3,12 +3,14 @@ import magnifying from '../../assets/icon/magnifying.svg'
 
 export default function InputText({ placeHolder, name, onChange, value, size }) {
     return (
-        <div>
+        <div
+            className={styles.inputArea}
+            style={{ width: size ? `${size}px` : 'auto' }}
+        >
             <label htmlFor="inputText" className={styles.inputTextLabel}>
                 <img src={magnifying} />
             </label>
             <input
-                style={{ width: size ? `${size}px` : 'auto' }}
                 type="text"
                 className={styles.inputText}
                 placeholder={placeHolder}
@@ -16,7 +18,8 @@ export default function InputText({ placeHolder, name, onChange, value, size }) 
                 name={name}
                 onChange={onChange}
                 value={value}
-            />
+            >
+            </input>
         </div>
     )
 }
