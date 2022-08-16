@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useNavigate } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
-
+import useCharacter from '.././../hooks/useCharacter'
 import Card from '../../components/card'
 import LeftArrow from '../../assets/icon/leftArrow.svg'
 import styles from './episodeInfo.module.css'
@@ -11,11 +11,9 @@ export default function LocationInfo() {
     const [episodeInfos, setEpisodeInfo] = useState([])
     const [characterList, setCharacterList] = useState([])
     const [cast, setCast] = useState([])
-
     const navigate = useNavigate()
     const { episode } = useParams()
     const { data: episodes } = useFetch("https://rickandmortyapi.com/api/episode")
-    const { data: character } = useFetch(`https://rickandmortyapi.com/api/character`)
 
     useEffect(() => {
         if (episodes) {
@@ -34,20 +32,25 @@ export default function LocationInfo() {
             let auxVar = "https://rickandmortyapi.com/api/character/"
             let forSlice = auxVar.length
             let castCharacter = episodeInfos.map(item => { return item?.characters })
-            let castEpisode = castCharacter?.map(item => {
+            let castEpisode = castCharacter[0]?.map(item => {
                 return (item.slice(forSlice))
             })
             setCharacterList(castEpisode)
-            console.log(castCharacter)
         }
     }, [episodeInfos])
 
     useEffect(() => {
-        if (characterList && character) {
+        if (characterList) {
+            fetch(`https://rickandmortyapi.com/api/character/${characterList}`)
+                .then(res => {
+                    return res.json()
+                })
+                .then((response) => {
+                    setCast(response)
+                })
             console.log(characterList)
-            setCast(character?.filter(item => item.id.includes(characterList)))
         }
-    }, [characterList, character])
+    }, [characterList])
 
     function goToCharacter(item) {
         navigate(`/character/${item.name}`)
@@ -98,14 +101,14 @@ export default function LocationInfo() {
                                     <div className={styles.container}>
                                         {
                                             cast.length > 0 &&
-                                            cast?.map(character => {
+                                            cast?.map((character, index) => {
                                                 return (
-                                                    <div className={styles.linkStyle} key={character.id}>
+                                                    <div className={styles.linkStyle} key={index}>
                                                         <Card
                                                             img={character.image}
                                                             name={character.name}
                                                             specie={character.species}
-                                                            onClick={() => goToCharacter(item)}
+                                                            onClick={() => goToCharacter(character)}
                                                         />
                                                     </div>
                                                 )

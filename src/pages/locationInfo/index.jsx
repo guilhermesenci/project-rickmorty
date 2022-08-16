@@ -10,6 +10,7 @@ export default function LocationInfo() {
     const [locationsList, setLocationsList] = useState([])
     const [locationFilter, setLocationFilter] = useState([])
     const [characterList, setCharacterList] = useState([])
+    const [residents, setResidents] = useState([])
 
     const navigate = useNavigate()
     const { location } = useParams()
@@ -36,14 +37,24 @@ export default function LocationInfo() {
             let auxVar = "https://rickandmortyapi.com/api/character/"
             let forSlice = auxVar.length
             let peopleLivingHere = locationFilter.map(item => { return item?.residents })
-            let livingHere = peopleLivingHere?.map(item => {
+            let livingHere = peopleLivingHere[0]?.map(item => {
                 return (item.slice(forSlice))
             })
             setCharacterList(livingHere)
         }
     }, [locationFilter])
 
-    const { data: character } = useFetch(`https://rickandmortyapi.com/api/character/${characterList}`)
+    useEffect(() => {
+        if (characterList) {
+            fetch(`https://rickandmortyapi.com/api/character/${characterList}`)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((response) => {
+                    setResidents(response)
+                })
+        }
+    }, [characterList])
 
     function goToCharacter(item) {
         navigate(`/character/${item.name}`)
@@ -78,21 +89,18 @@ export default function LocationInfo() {
                                 </div>
                                 <div>
                                     <div className={styles.container}>
-                                        {
-                                            character.length > 0 &&
-                                            character?.map(character => {
-                                                return (
-                                                    <div className={styles.linkStyle} key={character.id}>
-                                                        <Card
-                                                            img={character.image}
-                                                            name={character.name}
-                                                            specie={character.species}
-                                                            onclick={() => goToCharacter(character)}
-                                                        />
-                                                    </div>
-                                                )
-                                            })
-                                        }
+                                        {residents.length && residents.map(character => {
+                                            return (
+                                                <div className={styles.linkStyle} key={character.id}>
+                                                    <Card
+                                                        img={character.image}
+                                                        name={character.name}
+                                                        specie={character.species}
+                                                        onclick={() => goToCharacter(character)}
+                                                    />
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                 </div>
                             </div>

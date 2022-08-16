@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 import useFetch from '../../hooks/useFetch'
 import InfoText from '../../components/infoText'
@@ -10,6 +10,7 @@ export default function character() {
     const [charactersList, setCharactersList] = useState([])
     const [charactersFilter, setCharactersFilter] = useState([])
     const [episodesList, setEpisodesList] = useState([])
+    const [episodes, setEpisodes] = useState([])
 
     const navigate = useNavigate()
     const { name } = useParams()
@@ -39,7 +40,17 @@ export default function character() {
         }
     }, [charactersFilter])
 
-    const { data: episodes } = useFetch(`https://rickandmortyapi.com/api/episode/${episodesList}`)
+    useEffect(() => {
+        if (episodesList) {
+            fetch(`https://rickandmortyapi.com/api/episode/${episodesList}`)
+                .then((response) => {
+                    return response.json()
+                })
+                .then((res) => {
+                    setEpisodes(res)
+                })
+        }
+    }, [episodesList])
 
     function goBack() {
         navigate("/characters")
@@ -94,7 +105,7 @@ export default function character() {
                                     <div>
                                         <p className={styles.title}>Episodes</p>
                                         <div className={styles.scroll}>
-                                            {episodes.length > 0 && episodes.map(item => {
+                                            {episodes.length && episodes.map(item => {
                                                 return (
                                                     <InfoText
                                                         key={item.id}

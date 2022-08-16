@@ -14,7 +14,6 @@ export default function Episodes() {
     const navigate = useNavigate()
 
     const { data: episodes } = useFetch("https://rickandmortyapi.com/api/episode")
-    console.log(episodes)
 
     const episodesList = search.length > 0
         ? episodes.results?.filter(episodesList => episodesList.name.toLowerCase().includes(search))
