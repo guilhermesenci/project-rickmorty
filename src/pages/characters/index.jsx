@@ -8,8 +8,8 @@ import Card from '../../components/card'
 import InputText from '../../components/inputText'
 import SelectMenu from '../../components/selectMenu'
 import Header from '../../components/header'
+import Loader from '../../components/loader'
 
-import spinnerImg from '../../assets/loading.svg'
 import logo from '../../assets/logo.svg'
 
 export default function Characters() {
@@ -73,10 +73,7 @@ export default function Characters() {
     return (
         <>
             {
-                loading ?
-                    <div className={styles.loadingDiv}>
-                        <div className={styles.loadingImg}>< img src={spinnerImg} className={styles.rotate} /></div>
-                    </div>
+                loading ? <Loader />
                     :
                     <>
                         <div className={styles.container}>

@@ -1,8 +1,11 @@
+.body {
+    padding: 0 210px
+}
+
 .goBackDiv {
     position   : absolute;
     display    : flex;
     align-items: center;
-    margin-left: 240px;
     margin-top : 20px;
     cursor     : pointer;
 }
@@ -45,10 +48,9 @@
 }
 
 .scroll {
-    overflow-y : scroll;
-    overflow-x : hidden;
-    height     : 370px;
-    margin-left: 40px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height    : 370px;
 }
 
 .headerInformation {
@@ -97,10 +99,6 @@
     width  : 100%;
 }
 
-.residentsTitle {
-    margin-left: 240px;
-}
-
 .linkStyle {
     display       : flex;
     flex-direction: row;
@@ -108,17 +106,15 @@
     font-weight   : 600;
 }
 
-.link {
-    text-decoration: none;
-    color          : #000;
+.container>div {
+    padding: 10px 10px 10px 0;
 }
 
 .container {
     display        : flex;
     flex-wrap      : wrap;
     flex-direction : row;
-    padding        : 0 calc(20% - 100px);
-    justify-content: space-around;
+    justify-content: left;
     height         : 550px;
     overflow-y     : scroll;
 }

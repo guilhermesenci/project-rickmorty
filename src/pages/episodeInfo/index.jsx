@@ -91,9 +91,7 @@ export default function LocationInfo() {
                                     </div>
                                 </div>
                                 <div className={styles.residentsContainer}>
-                                    <div className={styles.residentsTitle}>
-                                        <span>Cast</span>
-                                    </div>
+                                    <span>Cast</span>
                                 </div>
                                 <div>
                                     <div className={styles.container}>

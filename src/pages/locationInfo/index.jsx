@@ -56,7 +56,7 @@ export default function LocationInfo() {
     }
 
     function goToCharacter(item) {
-        navigate(`/character/${item.name}`)
+        navigate(`/character/${item.name}/${item.id}`)
     }
 
     return (
@@ -82,25 +82,22 @@ export default function LocationInfo() {
                                     </div>
                                 </div>
                                 <div className={styles.residentsContainer}>
-                                    <div className={styles.residentsTitle}>
-                                        <span>Residents</span>
-                                    </div>
+                                    <span>Residents</span>
                                 </div>
-                                <div>
-                                    <div className={styles.container}>
-                                        {residents.length && residents.map((character, index) => {
-                                            return (
-                                                <div className={styles.linkStyle} key={index}>
-                                                    <Card
-                                                        img={character.image}
-                                                        name={character.name}
-                                                        specie={character.species}
-                                                        onClick={() => goToCharacter(character)}
-                                                    />
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
+                                <div className={styles.container}>
+                                    {residents.length && residents.map((character, index) => {
+                                        return (
+                                            <div className={styles.linkStyle} key={index}>
+                                                <Card
+                                                    img={character.image}
+                                                    name={character.name}
+                                                    specie={character.species}
+                                                    onClick={() => goToCharacter(character)}
+                                                    className={styles.card}
+                                                />
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>

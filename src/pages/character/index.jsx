@@ -60,6 +60,10 @@ export default function character() {
         navigate(`/locations/${item.location.name}`)
     }
 
+    function goToEpisode(value) {
+        navigate(`/episodes/${value.name}`)
+    }
+
     return (
         <>
             <div className={styles.body}>
@@ -115,7 +119,7 @@ export default function character() {
                                                             subtitle={item.name}
                                                             otherTitle={item.air_date}
                                                             button={true}
-                                                            onClick={() => goToLocation(item)}
+                                                            onClick={() => goToEpisode(item)}
                                                         />
                                                     )
                                                 })}
