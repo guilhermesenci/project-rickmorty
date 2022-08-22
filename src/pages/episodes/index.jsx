@@ -23,8 +23,6 @@ export default function Episodes() {
         navigate(`/episodes/${episode.name}`)
     }
 
-    console.log(episodes)
-
     return (
         <div className={styles.container}>
             <Header logoImage={logo} />

@@ -5,7 +5,7 @@ export default function InputText({ placeHolder, name, onChange, value, size }) 
     return (
         <div
             className={styles.inputArea}
-            style={{ width: size ? `${size}px` : 'auto' }}
+            style={{ width: size ? `${size}px` : '' }}
         >
             <label htmlFor="inputText" className={styles.inputTextLabel}>
                 <img src={magnifying} />

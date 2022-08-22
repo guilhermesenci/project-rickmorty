@@ -85,28 +85,30 @@ export default function Characters() {
                                     onChange={e => setSearch(e.target.value)}
                                     value={search}
                                 />
-                                <SelectMenu
-                                    name="species"
-                                    options={selectBySpecies}
-                                    placeholder="Species"
-                                    onChange={e => setSearch(e.target.value)}
-                                    value={selectBySpecies}
-                                />
-                                <SelectMenu
-                                    name="species"
-                                    options={selectByGender}
-                                    placeholder="Gender"
-                                    onChange={e => setSearch(e.target.value)}
-                                    value={selectByGender}
-                                />
-                                <SelectMenu
-                                    name="Status"
-                                    options={selectByStatus}
-                                    placeholder="Status"
-                                    onChange={e => setSearch(e.target.value)}
-                                    value={selectByStatus}
+                                <div className={styles.moreFilters}>
+                                    <SelectMenu
+                                        name="species"
+                                        options={selectBySpecies}
+                                        placeholder="Species"
+                                        onChange={e => setSearch(e.target.value)}
+                                        value={selectBySpecies}
+                                    />
+                                    <SelectMenu
+                                        name="species"
+                                        options={selectByGender}
+                                        placeholder="Gender"
+                                        onChange={e => setSearch(e.target.value)}
+                                        value={selectByGender}
+                                    />
+                                    <SelectMenu
+                                        name="Status"
+                                        options={selectByStatus}
+                                        placeholder="Status"
+                                        onChange={e => setSearch(e.target.value)}
+                                        value={selectByStatus}
+                                    />
+                                </div>
 
-                                />
                             </div>
                             {
                                 search.length > 0 ?

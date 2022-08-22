@@ -33,3 +33,17 @@
     padding-left: 20px;
     color       : rgba(0, 0, 0, 0.6);
 }
+
+@media (max-width: 768px) {
+    .container {
+        box-shadow    : 2px 2px 15px rgba(119, 119, 119, 0.3);
+        border-radius : 10px;
+        width         : 240px;
+        height        : 244px;
+        display       : flex;
+        flex-direction: column;
+        overflow      : hidden;
+        text-align    : left;
+    }
+
+}

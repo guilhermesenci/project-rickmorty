@@ -7,6 +7,7 @@
     justify-content : space-between;
     padding         : 0 210px;
     align-items     : center;
+    z-index         : 1 !important;
 }
 
 .linkStyle {
@@ -23,4 +24,48 @@
 
 .linkText {
     padding: 0 10px;
+}
+
+.hambuguerMenu {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .hambuguerMenu {
+        display: block;
+    }
+
+    .container {
+        padding: 0 24px;
+    }
+
+    .mobileMenu {
+        position        : absolute;
+        display         : flex;
+        background-color: #fff;
+        width           : 100%;
+        height          : 100%;
+        left            : 0;
+        bottom          : 0;
+        top             : 60px;
+        flex-direction  : column;
+        padding-top     : 50px;
+        justify-content : top;
+        align-items     : center;
+        box-shadow      : inset 0 4px 10px 0 rgba(119, 119, 119, 0.15);
+        z-index: 999;
+    }
+
+    .mobileMenu span {
+        padding-top: 40px;
+    }
+
+    .link {
+        font-size: 24px;
+        padding  : 24px 0;
+    }
 }

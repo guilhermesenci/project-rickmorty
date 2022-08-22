@@ -4,6 +4,8 @@
     display        : flex;
     justify-content: left;
     align-items    : center;
+    align-self     : center;
+    height         : 56px;
 }
 
 .inputText {
@@ -29,4 +31,10 @@ input:focus {
     align-items    : center;
     justify-content: center;
     align-self     : center;
+}
+
+@media (max-width: 768px) {
+    .inputArea {
+        width: 312px;
+    }
 }

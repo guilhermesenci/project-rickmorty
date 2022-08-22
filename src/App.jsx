@@ -16,7 +16,7 @@ function App() {
 
   return (
     <>
-      <NavBar />
+      <NavBar className={styles.navBar} />
       <div className={styles.scroll}>
         <Routes>
           <Route path="/" element={<Characters />} />

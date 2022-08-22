@@ -15,6 +15,10 @@
     padding-bottom : 40px;
 }
 
+.moreFilters {
+    display: flex;
+}
+
 .searchArea div {
     margin: 10px;
 }
@@ -26,4 +30,15 @@
     font-weight   : 600;
     cursor        : pointer;
     margin        : 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding-left : 20px;
+        padding-right: 10px;
+    }
+
+    .moreFilters {
+        display: none;
+    }
 }
